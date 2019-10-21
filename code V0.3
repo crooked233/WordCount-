@@ -1,0 +1,65 @@
+num=0
+data=[]
+print('命令模式：wc.exe[参数][文件名]，例：wc.exe -w file.txt为统计单词数，参数项左右各有一个空格')
+xx=input('请输入相关命令：')
+head,para,filename=xx.split()
+if head=='wc.exe':                     #统计字符数
+    if para=='-c':
+        f=open(filename,'r')
+        data=f.read()
+        for i in data:
+            if i==' ':
+               num=num
+            elif i=='\n':
+               num=num
+            else:
+               num=num+1
+        print('文章含有的字符数为：%d个'%num)
+    elif para=='-w':                   #统计单词数
+        f=open(filename,'r')              
+        data=f.read()
+        data=data.replace(',',' ')
+        data=data.replace('.',' ')
+        data=data.replace('!',' ')
+        data=data.replace('?',' ')
+        data=data.replace('"',' ')
+        data1=data.split()
+        print(data1)       #观察
+        num=len(data1)
+        print('文章含有的单词数为：%d个'%num)
+    elif para=='-s':                   #统计句子数
+        f=open(filename,'r')
+        data=f.read()
+        data=data.replace(',','^^')
+        data=data.replace('.','^^')
+        data=data.replace('!','^^')
+        data=data.replace('?','^^')
+        data=data.strip(' ')    #去除首尾空格
+        data=data.strip('"')    #去除首尾#号
+        data1=data.split('^^')
+        print(data1)
+        num=len(data1)
+        print('文章中含有的句子数为：%d句'%num)
+    elif para=='-code':                #统计代码空行数、注释数、代码行数
+        nullcount=0
+        notecount=0
+        codecount=0
+        A=open(filename,'r').readlines()
+        B=len(A)
+        for line in A:
+            line=line.strip()
+            if line=='':
+                nullcount=nullcount+1
+            elif line.startswith('#'):
+                notecount=notecount+1
+            else:
+                codecount=codecount+1
+        print('代码行数为：%d行'%codecount)
+        print('空行数为：%d行'%nullcount)
+        print('注释行为：%d行'%notecount)
+        
+    else:
+        print('输入参数不正确，请重新输入')
+else:
+    print('开头输入错误，开头应该为wc.exe')
+
