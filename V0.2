@@ -35,7 +35,8 @@ if head=='wc.exe':                     #统计字符数
         data=data.replace('!','^^')
         data=data.replace('?','^^')
         data=data.strip(' ')    #去除首尾空格
-        data=data.strip('"')    #去除首尾#号
+        data=data.strip('"')    #去除首尾"号
+        data=data.strip('^^')   #去除首尾^^
         data1=data.split('^^')
         print(data1)
         num=len(data1)
