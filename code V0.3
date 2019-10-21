@@ -44,16 +44,22 @@ if head=='wc.exe':                     #统计字符数
         nullcount=0
         notecount=0
         codecount=0
+        codecount1=0
         A=open(filename,'r').readlines()
         B=len(A)
         for line in A:
             line=line.strip()
-            if line=='':
+            if line=='':                  #统计空行数
                 nullcount=nullcount+1
             elif line.startswith('#'):
-                notecount=notecount+1
-            else:
+                notecount1=notecount1+1
+            else:                         #统计有效行
                 codecount=codecount+1
+            for i in line:                  #统计注释行
+                if i=='#':
+                    notecount=notecount+1
+                else:
+                    notecount=notecount
         print('代码行数为：%d行'%codecount)
         print('空行数为：%d行'%nullcount)
         print('注释行为：%d行'%notecount)
